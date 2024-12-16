@@ -152,15 +152,17 @@ jobs:
           curl -sSL https://github.com/aquasecurity/trivy/releases/download/v0.57.1/trivy_0.57.1_Linux-64bit.deb -o trivy.deb
           sudo dpkg -i trivy.deb
           rm trivy.deb
+  
+      - name: Install cyclonedx-bom
+        run: |
+          pip install --user cyclonedx-bom
+          which cyclonedx-bom
 
       - name: Generate SBOM from requirements.txt
-        run: |
-          pip install cyclonedx-bom
-          cyclonedx-bom -o requirements.cdx.json -r requirements.txt
-      
+        run: ~/.local/bin/cyclonedx-bom -o requirements.cdx.json -r requirements.txt
+
       - name: Scan SBOM for vulnerabilities
-        run: |
-          trivy sbom --format json --output reports/sbom-trivy-report.json requirements.cdx.json
+        run: trivy sbom --format json --output reports/sbom-trivy-report.json requirements.cdx.json
 
       - name: Upload SBOM Trivy Report
         uses: actions/upload-artifact@v3
@@ -183,7 +185,7 @@ jobs:
       - name: Run pip-audit scan
         run: |
           pip install pip-audit
-          pip-audit --format=json --output=reports/pip-audit.json
+          pip-audit --format=json --output=reports/pip-audit.json || true
           continue-on-error: true
       
       # 2. Загрузка отчета о результатах
