@@ -119,3 +119,5 @@ wcwidth
 webcolors
 webencodings
 websocket-client
+cyclonedx-python-lib
+pip-audit

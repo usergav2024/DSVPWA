@@ -155,7 +155,7 @@ jobs:
 
       - name: Generate SBOM from requirements.txt
         run: |
-          pip install cyclonedx-bom
+#pip install cyclonedx-bom
           cyclonedx-bom -o requirements.cdx.json -r requirements.txt
       
       - name: Scan SBOM for vulnerabilities
@@ -182,7 +182,7 @@ jobs:
 
       - name: Run pip-audit scan
         run: |
-          pip install pip-audit
+# pip install pip-audit
           pip-audit --format=json --output=reports/pip-audit.json
           continue-on-error: true
       
