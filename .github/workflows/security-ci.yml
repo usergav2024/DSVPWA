@@ -155,7 +155,7 @@ jobs:
 
       - name: Generate SBOM from requirements.txt
         run: |
-#pip install cyclonedx-bom
+# pip install cyclonedx-bom
           cyclonedx-bom -o requirements.cdx.json -r requirements.txt
       
       - name: Scan SBOM for vulnerabilities
