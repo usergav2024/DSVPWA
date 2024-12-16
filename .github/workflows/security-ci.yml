@@ -159,11 +159,12 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -v cyclonedx-bom
+          pip show cyclonedx-bom
           pip install pycairo
           pip check
 
       - name: Generate SBOM from requirements.txt
-        run: ~/.local/bin/cyclonedx-bom -o requirements.cdx.json -r requirements.txt
+        run: cyclonedx-bom -o requirements.cdx.json -r requirements.txt
 
       - name: Scan SBOM for vulnerabilities
         run: trivy sbom --format json --output reports/sbom-trivy-report.json requirements.cdx.json
