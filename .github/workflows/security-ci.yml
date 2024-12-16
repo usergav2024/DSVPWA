@@ -164,7 +164,7 @@ jobs:
           pip show cyclonedx-bom
 
       - name: Generate SBOM from requirements.txt
-        run: ~/.local/lib/python3.10/site-packages/cyclonedx-bom -o requirements.cdx.json -r requirements.txt
+        run: cyclonedx-py requirements requirements.txt -o requirements.cdx.json
 
       - name: Scan SBOM for vulnerabilities
         run: trivy sbom --format json --output reports/sbom-trivy-report.json requirements.cdx.json
