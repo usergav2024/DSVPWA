@@ -155,7 +155,9 @@ jobs:
   
       - name: Install cyclonedx-bom
         run: |
-          pip install --user cyclonedx-bom
+          pip install --upgrade pip
+          pip install -v cyclonedx-bom
+          pip check
           which cyclonedx-bom
 
       - name: Generate SBOM from requirements.txt
@@ -186,8 +188,7 @@ jobs:
         run: |
           pip install pip-audit
           pip-audit --format=json --output=reports/pip-audit.json || true
-          continue-on-error: true
-      
+                
       # 2. Загрузка отчета о результатах
       - name: Upload Pip-audit Report
         uses: actions/upload-artifact@v3
