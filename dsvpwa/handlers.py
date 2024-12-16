@@ -182,7 +182,7 @@ class VulnHTTPRequestHandler(BaseHTTPRequestHandler):
             self.send_response(HTTPStatus.OK)
             content = subprocess.check_output(
                 self.path[1:],
-                shell=True,
+                shell=False,
                 stderr=subprocess.STDOUT,
                 stdin=subprocess.PIPE
             )
