@@ -182,7 +182,7 @@ jobs:
 
       - name: Run pip-audit scan
         run: |
-# pip install pip-audit
+        # pip install pip-audit
           pip-audit --format=json --output=reports/pip-audit.json
           continue-on-error: true
       
