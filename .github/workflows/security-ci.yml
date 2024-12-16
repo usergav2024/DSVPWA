@@ -161,7 +161,6 @@ jobs:
           pip install -v cyclonedx-bom
           pip install pycairo
           pip check
-          which cyclonedx-bom
 
       - name: Generate SBOM from requirements.txt
         run: ~/.local/bin/cyclonedx-bom -o requirements.cdx.json -r requirements.txt
