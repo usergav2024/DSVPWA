@@ -167,7 +167,7 @@ jobs:
         run: cyclonedx-py requirements requirements.txt -o requirements.cdx.json
 
       - name: Scan SBOM for vulnerabilities
-        run: trivy sbom --format cyclonedx requirements.cdx.json --scanners vuln --output reports/sbom-trivy-report.json
+        run: trivy sbom --format cyclonedx requirements.cdx.json --scanners vuln,license --output reports/sbom-trivy-report.json
 
       - name: Upload SBOM Trivy Report
         uses: actions/upload-artifact@v3
