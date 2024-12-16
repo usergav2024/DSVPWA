@@ -55,9 +55,11 @@ jobs:
         run: |
           semgrep scan \
             --config "auto" \
+            --config "p/secrets" \
+            --config "p/owasp-top-ten" \
             --output reports/semgrep-results.sarif \
             --sarif \
-            --autofix || echo "Semgrep scan completed with warnings."
+            --autofix || true
       
       - name: Debug report existence
         run: |
@@ -68,7 +70,7 @@ jobs:
       
       - name: Upload SARIF file
         if: always()
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: reports/semgrep-results.sarif
 
@@ -157,6 +159,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -v cyclonedx-bom
+          pip install pycairo
           pip check
           which cyclonedx-bom
 
