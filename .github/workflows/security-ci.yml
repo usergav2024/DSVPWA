@@ -66,6 +66,20 @@ jobs:
             ls -la reports
           fi
       
+      - name: Upload SARIF file
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: reports/semgrep-results.sarif
+
+      - name: Upload Semgrep Results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: semgrep-results
+          path: reports/semgrep-results.sarif
+          retention-days: 14
+
       - name: Create Pull Request with fixes
         uses: peter-evans/create-pull-request@v5
         with:
@@ -80,20 +94,6 @@ jobs:
           branch: semgrep-fixes
           base: main
           delete-branch: true
-      
-      - name: Upload SARIF file
-        if: always()
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: reports/semgrep-results.sarif
-
-      - name: Upload Semgrep Results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: semgrep-results
-          path: reports/semgrep-results.sarif
-          retention-days: 14
 
   # ZAP: Динамический анализ
   zap_scan:
