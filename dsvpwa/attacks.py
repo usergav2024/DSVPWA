@@ -164,7 +164,7 @@ class CommandInjection(Attack):
                 domain = params.get('domain', '/')[0]
                 output = subprocess.check_output(
                     ' '.join([command, domain]),
-                    shell=True,
+                    shell=False,
                     stderr=subprocess.STDOUT,
                     stdin=subprocess.PIPE
                 )

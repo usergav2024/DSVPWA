@@ -19,4 +19,5 @@ COPY . .
 
 EXPOSE 65413
 
+USER non-root
 CMD [ "python", "./dsvpwa.py" , "--host", "0.0.0.0" ]
